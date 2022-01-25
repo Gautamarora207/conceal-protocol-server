@@ -5,7 +5,7 @@ const app = express();
 var cors = require('cors')
 
 
-const PORT = 7000;
+const port = process.env.PORT || 7000;
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +29,6 @@ app.post('/api/getProof',async (req, res) =>  {
 });
 
 
-app.listen(PORT, () => {
-    console.log(`listening at localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`listening at localhost:${port}`);
 });
