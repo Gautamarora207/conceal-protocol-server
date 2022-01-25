@@ -15,10 +15,7 @@ app.post('/api/getProof',async (req, res) =>  {
         const { note, recipient } = req.body;
         console.log(req.body);
 
-        const deposit = Deposit.parseNote(note);
-        console.log(deposit);
-
-        const response = await  Deposit.generateSnarkProof(deposit, recipient);
+        const response = await Deposit.parseNote(note, recipient);
         console.log(response);
         res.json({ type: 'success', response });
         
