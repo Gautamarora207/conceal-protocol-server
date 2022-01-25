@@ -2,6 +2,10 @@
   "name": "semilla-server",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "circom": "^0.0.35",
     "circomlib": "git+https://github.com/tornadocash/circomlib.git#3b492f9801573eebcfe1b6c584afe8a3beecf2b4",
