@@ -1,0 +1,34 @@
+{
+  "name": "semilla-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "circom": "^0.0.35",
+    "circomlib": "git+https://github.com/tornadocash/circomlib.git#3b492f9801573eebcfe1b6c584afe8a3beecf2b4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "snarkjs": "git+https://github.com/tornadocash/snarkjs.git#869181cfaf7526fe8972073d31655493a04326d5",
+    "web3": "^1.2.11",
+    "websnark": "git+https://github.com/tornadocash/websnark.git#2041cfa5fa0b71cd5cca9022a4eeea4afe28c9f7"
+  },
+  "scripts": {
+    "build:circuit:compile": "npx circom circuits/withdraw.circom -o src/build/circuits/withdraw.json && npx snarkjs info -c src/build/circuits/withdraw.json",
+    "build:circuit:setup": "npx snarkjs setup --protocol groth -c src/build/circuits/withdraw.json --pk src/build/circuits/withdraw_proving_key.json --vk src/build/circuits/withdraw_verification_key.json",
+    "build:circuit:bin": "node node_modules/websnark/tools/buildpkey.js -i src/build/circuits/withdraw_proving_key.json -o src/build/circuits/withdraw_proving_key.bin",
+    "build:circuit:contract": "npx snarkjs generateverifier -v src/build/circuits/Verifier.sol --vk src/build/circuits/withdraw_verification_key.json",
+    "build:circuit": "mkdir -p src/build/circuits && npm run build:circuit:compile && npm run build:circuit:setup && npm run build:circuit:bin && npm run build:circuit:contract",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "keywords": [],
+  "description": ""
+}
