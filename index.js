@@ -11,11 +11,10 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/api/getProof',async (req, res) =>  {
-
-    const { note, recipient } = req.body;
-    console.log(req.body);
-
     try {
+        const { note, recipient } = req.body;
+        console.log(req.body);
+
         const deposit = Deposit.parseNote(note);
         console.log(deposit);
 
